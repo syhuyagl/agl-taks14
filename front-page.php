@@ -50,10 +50,10 @@
                 <div class="news__inner">
                     <ul class="c-tabs">
                         <?php 
-                        $categories = get_categories(); 
+                        $categories = get_categories();
                         foreach ($categories as $category) {
                             echo '<li data-content= "all" data-color="#0078d2" class="active">' . $category->name . '</li>';
-                         }?>
+                        }?>
                         <!-- <li data-content="all" data-color="#0078d2" class="active">すべて</li>
                         <li data-content="cat_1" data-color="#1bb7c5">お知らせ</li>
                         <li data-content="cat_2" data-color="#d6772a">税の最新情報</li>
