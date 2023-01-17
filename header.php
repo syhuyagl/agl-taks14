@@ -14,7 +14,7 @@
 <body>
     <header class="c-header">
         <div class="l-container">
-            <h1 class="c-logo"><a href="index.html"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png"" alt="Allgrow Labo"></a></h1>
+            <h1 class="c-logo"><a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png"" alt="Allgrow Labo"></a></h1>
             <?php task14_menu('primary'); ?>
         </div>
     </header><!-- /header -->

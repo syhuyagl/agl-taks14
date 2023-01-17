@@ -1,13 +1,13 @@
 <footer class="c-footer">
         <div class="c-footer__logo">
             <div class="l-container">
-                <a href="#"><img src="assets/img/logo.png" alt=""></a>
+                <a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" alt=""></a>
             </div>
         </div>
         <div class="c-footer__main">
             <div class="l-container">
                 <div class="c-footer__link">
-                    <h3><a href="news.html">ニュース</a></h3>
+                    <h3><a href="<?php echo get_site_url(); ?>/news">ニュース</a></h3>
                     <ul class="c-boxlink">
                         <li><a href="#">お知らせ</a></li>
                         <li><a href="#">税の最新情報</a></li>
@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="c-footer__link">
-                    <h3><a href="cases.html">成功事例</a></h3>
+                    <h3><a href="<?php echo get_site_url(); ?>/cases">成功事例</a></h3>
                     <ul class="c-boxlink">
                         <li><a href="#">法人のお客様</a></li>
                         <li><a href="#">個人のお客様</a></li>
