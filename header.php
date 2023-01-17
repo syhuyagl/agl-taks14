@@ -15,12 +15,6 @@
     <header class="c-header">
         <div class="l-container">
             <h1 class="c-logo"><a href="index.html"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png"" alt="Allgrow Labo"></a></h1>
-            <nav class="c-gnav">
-                <ul>
-                    <li><a href="service.html">サービス</a></li>
-                    <li><a href="publish.html">出版物</a></li>
-                    <li><a href="contact.html">お問い合わせ</a></li>
-                </ul>
-            </nav>
+            <?php task14_menu('primary'); ?>
         </div>
     </header><!-- /header -->
