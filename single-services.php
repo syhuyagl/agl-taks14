@@ -38,10 +38,12 @@ $steps = get_field('steps', $post->ID);
             <dt>このような方はご相談ください</dt>
             <?php
             if ($targets): ?>
-				<?php foreach ($targets as $target): ?>
-                    <dd class="c-checkMark"> <?php echo $target['target'] ?></dd>
-				<?php endforeach; ?>
-			<?php endif; ?>
+                <?php foreach ($targets as $target): ?>
+                    <dd class="c-checkMark">
+                        <?php echo $target['target'] ?>
+                    </dd>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </dl>
     </div>
 
@@ -49,13 +51,15 @@ $steps = get_field('steps', $post->ID);
         <div class="l-container2">
             <h3 class="p-service__title">ひかり税理士法人を選ぶメリット</h3>
             <dl>
-            <?php
+                <?php
                 if ($advantages): ?>
                     <?php foreach ($advantages as $advantage): ?>
-                        <dt class="c-checkMark"><?php echo $advantage['advantage_title'] ?></dt>
-                    <dd><?php echo $advantage['advantage_description'] ?></dd>
+                        <dt class="c-checkMark">
+                            <?php echo $advantage['advantage_title'] ?>
+                        </dt>
+                        <dd><?php echo $advantage['advantage_description'] ?></dd>
                     <?php endforeach; ?>
-			<?php endif; ?>
+                <?php endif; ?>
             </dl>
         </div>
     </div>
@@ -64,25 +68,37 @@ $steps = get_field('steps', $post->ID);
         <div class="l-container2">
 
             <h3 class="p-service__title">サービスの流れ</h3>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>STEP1</th>
-                        <td>
-                            <h4 class="flow-title">月次業務</h4>
-                            <h5 class="flow-subtitle">監査業務</h5>
-                            <p class="c-checkMark">
-                                毎月あるいは3ヶ月に1度など、お客様の元へ訪問し、会計ソフトに入力されたデータを通帳・請求書・領収書等の会計資料と照合し、監査を行います。また、税務上注意すべき点がないか監査します。監査終了後、月次報告をさせていただきます。
-                            </p>
-                            <p class="c-checkMark">データ監査の場合は、会計ソフトに入力されたデータと通帳・請求書・領収書等の会計資料をお預かりし、訪問監査と同様の監査を行います。
-                                監査終了後、訪問またはメール等で月次報告をさせていただきます。</p>
-                            <h5 class="flow-subtitle">記帳代行業務</h5>
-                            <p class="c-checkMark">通帳・請求書・領収書等の会計資料をお預かりし、当事務所で記帳業務を行います。
-                                記帳終了後、訪問またはメール等で月次報告をさせていただきます。</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <?php
+            $index = 1;
+            if ($steps): ?>
+                <?php foreach ($steps as $step): ?>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>STEP <?php echo $index ?></th>
+                                <td>
+                                    <h4 class="flow-title"><?php echo $step['step_title'] ?></h4>
+                                    <?php
+                                    if($step['step_subtitles']): 
+                                    ?>
+                                        <?php foreach ($step['step_subtitles'] as $stepSubtitle): ?>
+                                            <?php if ($stepSubtitle['step_subtitle']): ?>
+                                                <h5 class="flow-subtitle"><?php echo $stepSubtitle['step_subtitle'] ?></h5>
+                                            <?php endif; ?>
+                                                <?php foreach ($stepSubtitle['step_descriptions'] as $stepDes): ?>
+                                                    <p class="c-checkMark">
+                                                        <?php echo $stepDes['step_description'] ?>
+                                                    </p>
+                                                <?php endforeach; ?>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php $index++; endforeach; ?>
+            <?php endif; ?>
+
             <table>
                 <tbody>
                     <tr>
