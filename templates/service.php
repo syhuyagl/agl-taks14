@@ -29,6 +29,9 @@
                     <div class="checkArea__form">
                         <legend class="servicesList-heading">サービスの対象で選ぶ</legend>
                         <div class="checkArea__inner">
+                            <?php
+                            $taxonomy = get_queried_object();
+                            echo $taxonomy->name; ?>
                             <div class="c-w240">
                                 <label>
                                     <input class="chkbutton" type="checkbox" name="" value="2" checked="">事業者の方</label>
@@ -53,46 +56,49 @@
                         <div class="checkArea__inner">
                             <div class="c-w156">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="6">税務</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox[]" value="6">税務</label>
                             </div>
                             <div class="c-w156">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="7">財務</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox[]" value="7">財務</label>
                             </div>
                             <div class="c-w156">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="8">相続</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox[]" value="8">相続</label>
                             </div>
                             <div class="c-w240">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="9">事業承継</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox[]" value="9">事業承継</label>
                             </div>
                             <div class="c-w240">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="10">ビジネスサポート</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox[]"
+                                        value="10">ビジネスサポート</label>
                             </div>
                         </div>
                     </div>
                 </form>
             </div>
 
+            <?php
+            $services = get_posts(array('post_type' => 'services', 'orderby' => 'date', 'order' => 'DESC', 'posts_per_page' => 10));
+            ?>
             <p class="p-service__result">23件が該当しました</p>
-
-
             <ul class="c-column">
-                <?php
-                $services = get_posts(array('post_type' => 'services', 'orderby' => 'date', 'order' => 'DESC', 'posts_per_page' => 10));
-                foreach ($services as $service):
+
+                <?php foreach ($services as $service):
                     setup_postdata($service);
                     ?>
                     <li class="c-column__item"><a href="<?php echo get_permalink($service->ID); ?>">
-                        <img src="<?php $icon = get_field('icon', $service->ID); echo esc_url($icon['url']);  ?>" alt="<?php echo get_the_title($service->ID); ?>">
-                        <p><?php echo get_the_title($service->ID); ?></p>
-                    </a>
-                </li>
+                            <img src="<?php $icon = get_field('icon', $service->ID);
+                            echo esc_url($icon['url']); ?>" alt="<?php echo get_the_title($service->ID); ?>">
+                            <p>
+                                <?php echo get_the_title($service->ID); ?>
+                            </p>
+                        </a>
+                    </li>
                 <?php endforeach; ?>
             </ul>
-
             <div class="endcontent">
                 <img src="assets/img/img_more05.png" alt="">
                 <img src="assets/img/img_more06.png" alt="">

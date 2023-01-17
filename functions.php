@@ -105,7 +105,7 @@ function publish_post_type()
     );
 
     // Registering your Custom Post Type
-    register_post_type('Publishs', $args);
+    register_post_type('publishs', $args);
 
 }
 
@@ -164,7 +164,7 @@ function service_post_type()
     );
 
     // Registering your Custom Post Type
-    register_post_type('Services', $args);
+    register_post_type('services', $args);
 
 }
 
@@ -244,4 +244,42 @@ function service_taxonomy()
 // Hook into the 'init' action
 add_action('init', 'service_taxonomy', 0);
 
+function service_content_taxonomy()
+{
+    /* Biến $label chứa các tham số thiết lập tên hiển thị của Taxonomy
+     */
+    $labels = array(
+        'name' => 'Service Content Taxonomy',
+        'singular' => 'Service Content Taxonomy',
+        'menu_name' => 'Service Content Taxonomy',
+    );
+    /* Biến $args khai báo các tham số trong custom taxonomy cần tạo
+     */
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => false,
+        'public' => true,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'show_in_nav_menus' => true,
+        'show_tagcloud' => true,
+    );
+
+
+    /* Hàm register_taxonomy để khởi tạo taxonomy
+     */
+    register_taxonomy('service-content-taxonomy', 'services', $args);
+
+
+}
+// Hook into the 'init' action
+add_action('init', 'service_content_taxonomy', 0);
+
+function x_filter_by_category($query)
+{
+    if ($query->is_home() && $query->is_main_query() && isset($_GET['checkbox'])) {
+        $query->set('cat', implode(',', $_GET['checkbox']));
+    }
+}
+add_action('pre_get_posts', 'x_filter_by_category');
 ?>
