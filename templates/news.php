@@ -6,7 +6,7 @@
 <main class="p-news">
     <div class="c-breadcrumb">
         <div class="l-container">
-            <a href="index.html">Home</a>
+            <a href="<?php echo get_site_url(); ?>">Home</a>
             <span>ニュース・お知らせ</span>
         </div>
     </div>
