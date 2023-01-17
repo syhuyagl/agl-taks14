@@ -77,7 +77,15 @@ function publish_post_type()
         'label' => __('publishs', 'task14'),
         'description' => __('Publish news and reviews', 'task14'),
         'labels' => $labels,
-        'supports' => array('title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields',
+        'supports' => array(
+            'title',
+            'editor',
+            'excerpt',
+            'author',
+            'thumbnail',
+            'comments',
+            'revisions',
+            'custom-fields',
         ),
         'taxonomies' => array('genres'),
         'hierarchical' => false,
@@ -102,41 +110,138 @@ function publish_post_type()
 }
 
 add_action('init', 'publish_post_type', 0);
+function service_post_type()
+{
 
-function get_category_color ($category){
-    if($category == "お知らせ"){
+    // Set UI labels for Custom Post Type
+    $labels = array(
+        'name' => _x('Services', 'Post Type General Name', 'task14'),
+        'singular_name' => _x('Service', 'Post Type Singular Name', 'task14'),
+        'menu_name' => __('Services', 'task14'),
+        'parent_item_colon' => __('Parent Service', 'task14'),
+        'all_items' => __('All Services', 'task14'),
+        'view_item' => __('View Service', 'task14'),
+        'add_new_item' => __('Add New Service', 'task14'),
+        'add_new' => __('Add New', 'task14'),
+        'edit_item' => __('Edit Service', 'task14'),
+        'update_item' => __('Update Service', 'task14'),
+        'search_items' => __('Search Service', 'task14'),
+        'not_found' => __('Not Found', 'task14'),
+        'not_found_in_trash' => __('Not found in Trash', 'task14'),
+    );
+
+    // Set other options for Custom Post Type
+
+    $args = array(
+        'label' => __('services', 'task14'),
+        'description' => __('Service news and reviews', 'task14'),
+        'labels' => $labels,
+        'supports' => array(
+            'title',
+            'editor',
+            'excerpt',
+            'author',
+            'thumbnail',
+            'comments',
+            'revisions',
+            'custom-fields',
+        ),
+        'taxonomies' => array('genres'),
+        'hierarchical' => false,
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'show_in_nav_menus' => true,
+        'show_in_admin_bar' => true,
+        'menu_position' => 5,
+        'can_export' => true,
+        'has_archive' => true,
+        'exclude_from_search' => false,
+        'publicly_queryable' => true,
+        'capability_type' => 'post',
+        'show_in_rest' => true,
+
+    );
+
+    // Registering your Custom Post Type
+    register_post_type('Services', $args);
+
+}
+
+add_action('init', 'service_post_type', 0);
+function get_category_color($category)
+{
+    if ($category == "お知らせ") {
         echo "#1bb7c5";
     }
-    if($category == "税の最新情報"){
+    if ($category == "税の最新情報") {
         echo "#d6772a";
     }
-    if($category == "税制改正"){
+    if ($category == "税制改正") {
         echo "#c4a021";
     }
-    if($category == "掲載情報"){
+    if ($category == "掲載情報") {
         echo "#416ad3";
     }
-    if($category == "バックナンバー"){
+    if ($category == "バックナンバー") {
         echo "#ccc";
     }
 }
+
 function pagination($custom_query = null)
 {
     global $wp_query;
-    if ($custom_query) $main_query = $custom_query;
-    else $main_query = $wp_query;
+    if ($custom_query)
+        $main_query = $custom_query;
+    else
+        $main_query = $wp_query;
     $big = 999999999;
     $total = isset($main_query->max_num_pages) ? $main_query->max_num_pages : '';
-    if ($total > 1) echo '<div class="c-pagination">';
-    echo paginate_links(array(
-        'base'        => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-        'format'   => '?paged=%#%',
-        'current'  => max(1, get_query_var('paged')),
-        'total'    => $total,
-        'mid_size' => '5',
-        'prev_text'    => __('', 'task14'),
-        'next_text'    => __('', 'task14'),
-    ));
-    if ($total > 1) echo '</div>';
+    if ($total > 1)
+        echo '<div class="c-pagination">';
+    echo paginate_links(
+        array(
+            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+            'format' => '?paged=%#%',
+            'current' => max(1, get_query_var('paged')),
+            'total' => $total,
+            'mid_size' => '5',
+            'prev_text' => __('', 'task14'),
+            'next_text' => __('', 'task14'),
+        )
+    );
+    if ($total > 1)
+        echo '</div>';
 }
+function service_taxonomy()
+{
+    /* Biến $label chứa các tham số thiết lập tên hiển thị của Taxonomy
+     */
+    $labels = array(
+        'name' => 'Service Taxonomy',
+        'singular' => 'Service Taxonomy',
+        'menu_name' => 'Service Taxonomy',
+    );
+    /* Biến $args khai báo các tham số trong custom taxonomy cần tạo
+     */
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => false,
+        'public' => true,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'show_in_nav_menus' => true,
+        'show_tagcloud' => true,
+    );
+
+
+    /* Hàm register_taxonomy để khởi tạo taxonomy
+     */
+    register_taxonomy('service-taxonomy', 'services', $args);
+
+
+}
+// Hook into the 'init' action
+add_action('init', 'service_taxonomy', 0);
+
 ?>
