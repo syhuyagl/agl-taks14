@@ -341,8 +341,6 @@ function call_post_init()
     );
 
     $query = new WP_Query($args);
-    //if( ! empty ($params['template'])) {
-    ////$template = $params['template'];
     if ($query->have_posts()):
         while ($query->have_posts()):
             $query->the_post();
@@ -352,8 +350,6 @@ function call_post_init()
     else:
         wp_send_json($query->posts);
     endif;
-    //}
-
     die();
 }
 

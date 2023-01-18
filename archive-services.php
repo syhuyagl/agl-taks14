@@ -1,7 +1,3 @@
-<?php
-/* Template Name: Service
- */
-?>
 <?php get_header();
 $terms = get_terms([
     'taxonomy' => "service-taxonomy",

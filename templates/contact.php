@@ -20,7 +20,7 @@
 			<div class="l-container">
 				<h3>メールでのお問い合わせ</h3>
 				<p class="notice">下記に必要事項をご記入の上送信下さい。弊所のコンサルタントからご連絡をさせて頂きます。</p>
-				<form>
+				<!-- <form>
 					<table>
 						<tr>
 							<th>お名前<span class="required">必須</span></th>
@@ -74,7 +74,7 @@
 							<a href="confirm.html">入力内容を確認する</a>
 						</div>
 					</div>
-				</form>
+				</form> -->
 			</div>
 		</div>
 	</main>
