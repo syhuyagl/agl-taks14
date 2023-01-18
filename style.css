@@ -810,7 +810,7 @@ Layout
   color: #fff;
 }
 
-.c-gnav li.active {
+.c-gnav .current-menu-item {
   color: #0078d2;
   font-weight: bold;
 }
