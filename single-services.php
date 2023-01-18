@@ -8,6 +8,7 @@ $feature_image = get_field('image', $post->ID);
 $targets = get_field('targets', $post->ID);
 $advantages = get_field('advantages', $post->ID);
 $steps = get_field('steps', $post->ID);
+$relatedServices = get_field('related_services', $post->ID)
 ?>
 
 <main class="p-service">
@@ -30,7 +31,7 @@ $steps = get_field('steps', $post->ID);
     </div>
 
     <div class="feature_img">
-        <img src=" <?php echo esc_url($feature_image['url']) ?>" alt="">
+        <img src="<?php echo esc_url($feature_image['url']) ?>" alt="">
     </div>
 
     <div class="p-service__consultation">
@@ -54,9 +55,11 @@ $steps = get_field('steps', $post->ID);
                 <?php
                 if ($advantages): ?>
                     <?php foreach ($advantages as $advantage): ?>
-                        <dt class="c-checkMark">
-                            <?php echo $advantage['advantage_title'] ?>
-                        </dt>
+                        <?php if ($advantage['advantage_title']): ?>
+                            <dt class="c-checkMark">
+                                <?php echo $advantage['advantage_title'] ?>
+                            </dt>
+                        <?php endif; ?>
                         <dd><?php echo $advantage['advantage_description'] ?></dd>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -98,47 +101,6 @@ $steps = get_field('steps', $post->ID);
                     </table>
                 <?php $index++; endforeach; ?>
             <?php endif; ?>
-
-            <table>
-                <tbody>
-                    <tr>
-                        <th>STEP2</th>
-                        <td>
-                            <h4 class="flow-title">決算予測・決算対策</h4>
-                            <p class="c-checkMark">
-                                決算月の2ヶ月前頃に決算予測を行い、今期の業績を予想します。業績予想から、適切な節税方法の提案や納税準備のための資金繰り等、決算を迎えるための事前準備を行います。</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>STEP3</th>
-                        <td>
-                            <h4 class="flow-title">決算報告・決算後対策</h4>
-                            <p class="c-checkMark">決算書類・申告書類作成後に、最終の業績及び財務状況、納税額を報告させていただきます。</p>
-                            <p class="c-checkMark">今期の業績分析を行い、現状の課題の抽出し、今後の方針等を検討します。
-                                同時に来期の業績予想を行い、役員報酬等の見直し等、適切な税務対応を実施します。</p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>STEP4</th>
-                        <td>
-                            <h4 class="flow-title">年末調整等の年次業務</h4>
-                            <p class="c-checkMark">
-                                年末調整、給与支払報告書・法定調書・償却資産税申告書の作成と、通常の月次・決算業務の他に年１回義務付けられている法定業務についても、サポートいたします。
-                                給与計算・各種社会保険の手続きについては【ひかり社会保険労務士法人】がお手伝いさせていただきます。<br>ひかり社会保険労務士法人 <a
-                                    href="#">http://labor.hikari-advisor.com/</a></p>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
         </div>
     </div>
 
@@ -146,18 +108,21 @@ $steps = get_field('steps', $post->ID);
         <div class="l-container">
             <h3 class="p-service__subtitle">関連サービス</h3>
             <ul class="division-list c-flex">
-                <li class="small-12 medium-4">
-                    <a href="http://www.hikari-tax.com/services/s07">
-                        <p class="img"><img src="assets/img/1.jpg"></p>
-                        <p class="text"><span class="arrow">経理改善</span></p>
-                    </a>
-                </li>
-                <li class="small-12 medium-4">
-                    <a href="http://www.hikari-tax.com/services/s20">
-                        <p class="img"><img src="assets/img/1.jpg" alt="1.jpg"></p>
-                        <p class="text"><span class="arrow">会計顧問</span></p>
-                    </a>
-                </li>
+                <?php
+                if($relatedServices):
+                ?>
+                     <?php foreach ($relatedServices as $relatedService): ?>
+                            <?php $related_icon = get_field('icon',$relatedService['related_service']->ID  ) ?>
+                        <li class="small-12 medium-4">
+                            <a href="<?php echo get_permalink($relatedService['related_service']->ID); ?>">
+                                <p class="img"><img src="<?php echo esc_url( $related_icon['url']) ?>" alt="1.jpg"></p>
+                                <p class="text"><span class="arrow"><?php echo $relatedService['related_service'] -> title ?></span></p>
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
+                <?php endif; ?>
+                
+                
             </ul>
         </div>
 
