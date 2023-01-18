@@ -292,7 +292,7 @@ function service_content_taxonomy()
      */
     $args = array(
         'labels' => $labels,
-        'hierarchical' => false,
+        'hierarchical' => true,
         'public' => true,
         'show_ui' => true,
         'show_admin_column' => true,
@@ -343,12 +343,10 @@ function call_post_init()
     $query = new WP_Query($args);
     //if( ! empty ($params['template'])) {
     ////$template = $params['template'];
-    var_dump($query);
-    exit();
     if ($query->have_posts()):
         while ($query->have_posts()):
             $query->the_post();
-            echo '<h1>Hekklo </h1>';
+            get_template_part('template-parts/content', 'filter', $args);
         endwhile;
         wp_reset_query();
     else:

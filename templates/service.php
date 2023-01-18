@@ -78,7 +78,6 @@ $termsContent = get_terms([
             ?>
             <p class="p-service__result">23件が該当しました</p>
             <ul class="c-column">
-
                 <?php foreach ($services as $service):
                     setup_postdata($service);
                     ?>

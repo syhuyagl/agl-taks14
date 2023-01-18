@@ -32,8 +32,8 @@ $(document).ready(function () {
   $("#serviceSearch .chkbutton").click(function () {
     var choices = {};
     var form = $("#serviceSearch")
-    $(".contents").remove();
-    $(".filter-output").empty();
+    $(".c-column__item").remove();
+    $(".c-column").empty();
 
     $("input[type=checkbox]:checked").each(function () {
       if (!choices.hasOwnProperty(this.name)) choices[this.name] = [this.value];
@@ -47,7 +47,7 @@ $(document).ready(function () {
         choices: choices,
       },
       success: function (result) {
-        $(".filter-output").append(result);
+        $(".c-column").append(result);
         // console.log(result);
       },
       error: function (err) {
@@ -56,4 +56,4 @@ $(document).ready(function () {
     });
   });
 });
-$(document.body).trigger("post-load");
+$(document.body).trigger("call_post");
