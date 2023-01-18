@@ -2,7 +2,16 @@
 /* Template Name: Service
  */
 ?>
-<?php get_header(); ?>
+<?php get_header();
+$terms = get_terms([
+    'taxonomy' => "service-taxonomy",
+    'hide_empty' => false,
+]);
+$termsContent = get_terms([
+    'taxonomy' => "service-content-taxonomy",
+    'hide_empty' => false,
+])
+    ?>
 <main class="p-service">
     <div class="c-breadcrumb">
         <div class="l-container">
@@ -24,57 +33,41 @@
             <p class="notice">ひかり税理士法人がご提供するすべてのサービスを目的別に検索していただけます</p>
             <!-- =======checkArea====== -->
             <div class=" p-service__checkArea">
-                <form id="serviceSearch" method="POST" action="<?php echo site_url() ?>/wp-admin/admin-ajax.php">
+                <form id="serviceSearch" method="POST" action="#" data-url="<?php echo admin_url('admin-ajax.php') ?>">
 
                     <div class="checkArea__form">
                         <legend class="servicesList-heading">サービスの対象で選ぶ</legend>
                         <div class="checkArea__inner">
                             <?php
-                            $taxonomy = get_queried_object();
-                            echo $taxonomy->name; ?>
-                            <div class="c-w240">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox" value="事業者の方">事業者の方</label>
-                            </div>
-                            <div class="c-w240">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox" value="社会福祉法人">社会福祉法人</label>
-                            </div>
-                            <div class="c-w240">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox" value="個人の方">個人の方</label>
-                            </div>
-                            <div class="c-w240">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox" value="医療従事者の方">医療従事者の方</label>
-                            </div>
+                            if ($terms): ?>
+                                <?php foreach ($terms as $term): ?>
+                                    <div class="c-w240">
+                                        <label>
+                                            <input class="chkbutton" type="checkbox" name="service-taxonomy"
+                                                value="<?php echo $term->term_id ?>">
+                                            <?php echo $term->name ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
 
                     <div class="checkArea__form form2">
                         <legend class="servicesList-heading">サービスの内容で選ぶ</legend>
                         <div class="checkArea__inner">
-                            <div class="c-w156">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox" value="税務">税務</label>
-                            </div>
-                            <div class="c-w156">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox" value="財務">財務</label>
-                            </div>
-                            <div class="c-w156">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox" value="相続">相続</label>
-                            </div>
-                            <div class="c-w240">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox" value="事業承継">事業承継</label>
-                            </div>
-                            <div class="c-w240">
-                                <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox"
-                                        value="10">ビジネスサポート</label>
-                            </div>
+                            <?php
+                            if ($termsContent): ?>
+                                <?php foreach (array_reverse($termsContent) as $term): ?>
+                                    <div class="c-w156">
+                                        <label>
+                                            <input class="chkbutton" type="checkbox" name="service-content-taxonomy"
+                                                value="<?php echo $term->term_id ?>">
+                                            <?php echo $term->name ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </form>

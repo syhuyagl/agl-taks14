@@ -5,6 +5,7 @@
         add_theme_support('post-thumbnails');
         add_theme_support('post-formats', array('image', 'video', 'gallary', 'quote', 'link'));
         add_theme_support('title-tag');
+        add_theme_support('automatic-feed-links');
         $default_color = array('default-color' => '#cccccc');
         add_theme_support('custom-background', $default_color);
         register_nav_menus(
@@ -44,7 +45,12 @@ if (!function_exists('task14_footermenu')) {
     }
 }
 
-
+add_filter('services_post_type_args', '_my_rewrite_slug'); // Here replace "your-post-type" with the actual post type, e.g., "cherry_services", "cherry-projects"
+function _my_rewrite_slug($args)
+{
+    $args['rewrite']['slug'] = 'services'; // Replace "our-services" with your preferable slug
+    return $args;
+}
 
 if (!function_exists('mytheme_scripts')) {
     function mytheme_scripts()
@@ -255,7 +261,7 @@ function service_taxonomy()
      */
     $args = array(
         'labels' => $labels,
-        'hierarchical' => false,
+        'hierarchical' => true,
         'public' => true,
         'show_ui' => true,
         'show_admin_column' => true,
@@ -312,33 +318,37 @@ function x_filter_by_category($query)
 }
 add_action('pre_get_posts', 'x_filter_by_category');
 
-add_action('wp_ajax_call_post', 'call_post');
-add_action('wp_ajax_nopriv_call_post', 'call_post');
-function call_post()
+add_action('wp_ajax_call_post', 'call_post_init');
+add_action('wp_ajax_nopriv_call_post', 'call_post_init');
+function call_post_init()
 {
     // Getting the ajax data:
     // An array of keys("name")/values of each "checked" checkbox
-    $choices = $_POST['choices'];
     $meta_query = array('relation' => 'OR');
-    var_dump($choices);
+    $choices = $_POST['choices'];
     foreach ($choices as $Key => $Value) {
         if (count($Value)) {
             foreach ($Value as $Inkey => $Invalue) {
-                $meta_query[] = array('key' => $Key, 'value' => $Invalue, 'compare' => '=');
+                $meta_query[] = array('taxonomy' => $Key, 'field' => 'term_id', 'terms' => (int) $Invalue, 'include_children' => true);
             }
+
         }
     }
+
     $args = array(
-        'post_type' => 'post',
-        'meta_query' => $meta_query
+        'post_type' => 'services',
+        'tax_query' => $meta_query
     );
 
     $query = new WP_Query($args);
     //if( ! empty ($params['template'])) {
     ////$template = $params['template'];
+    var_dump($query);
+    exit();
     if ($query->have_posts()):
         while ($query->have_posts()):
             $query->the_post();
+            echo '<h1>Hekklo </h1>';
         endwhile;
         wp_reset_query();
     else:

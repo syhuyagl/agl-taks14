@@ -31,7 +31,7 @@ $(document).ready(function () {
 
   $("#serviceSearch .chkbutton").click(function () {
     var choices = {};
-
+    var form = $("#serviceSearch")
     $(".contents").remove();
     $(".filter-output").empty();
 
@@ -39,9 +39,8 @@ $(document).ready(function () {
       if (!choices.hasOwnProperty(this.name)) choices[this.name] = [this.value];
       else choices[this.name].push(this.value);
     });
-    console.log(choices);
     $.ajax({
-      url: ajax_object.ajax_url,
+      url: form.data('url'),
       type: "POST",
       data: {
         action: "call_post",

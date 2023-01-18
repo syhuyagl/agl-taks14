@@ -235,7 +235,7 @@
             <div class="publish__inner">
                 <ul class="c-gridpost">
                     <?php
-                       $publishs = get_posts(array('post_type' =>'publishs','orderby' => 'rand')); foreach ($publishs as $publish):
+                       $publishs = get_posts(array('post_type' =>'publishs','orderby' => 'rand', 'posts_per_page'=>4)); foreach ($publishs as $publish):
                         setup_postdata($publish);
                         ?>
                              <?php $date = get_field('public_date', $publish->ID);

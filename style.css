@@ -635,7 +635,9 @@ Component
   content: "\f104";
   font-family: "fontAwesome";
 }
-
+.c-w156:nth-last-child(-n+2){
+  width: 240px;
+}
 .c-pagination a.next:before {
   content: "\f105";
   font-family: "fontAwesome";

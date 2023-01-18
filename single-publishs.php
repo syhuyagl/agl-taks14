@@ -17,7 +17,7 @@ $contents = get_field('contents', $post->ID);
         <div class="l-container">
             <a href="<?php echo get_site_url(); ?>">Home</a>
             <a href="<?php echo get_site_url(); ?>/publish">出版物</a>
-            <span>社長に“もしものこと”があったときの手続きすべて</span>
+            <span><?php echo $title ?></span>
         </div>
     </div>
 
