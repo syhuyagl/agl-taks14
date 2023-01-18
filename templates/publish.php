@@ -42,7 +42,7 @@
                                 <p class="datepost"><?php echo $date ?></p>
                                 <h3><?php echo $title ?></h3>
                                 <p class="price">¥<?php echo $price ?> (税別)</p>
-                                <a href="publish-post.html" class="c-btnview">詳しく見る</a>
+                                <a href="<?php echo get_permalink($post->ID); ?>" class="c-btnview">詳しく見る</a>
                             </div>
                         </li>
                     <?php endwhile; ?>
