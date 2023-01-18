@@ -238,13 +238,17 @@
                        $publishs = get_posts(array('post_type' =>'publishs','orderby' => 'rand')); foreach ($publishs as $publish):
                         setup_postdata($publish);
                         ?>
+                             <?php $date = get_field('public_date', $publish->ID);
+                                $image = get_field('image', $publish->ID);
+                                $title = get_field('title', $publish->ID);
+                             ?>
                                 <li class="c-gridpost__item">
-                                    <a href="">
+                                    <a href="<?php echo get_permalink($publish->ID); ?>">
                                         <div class="c-gridpost__thumb">
-                                            <img src="<?php echo wp_get_attachment_url(get_post_thumbnail_id($publish->ID), 'thumbnail'); ?> "alt="">
+                                            <img src="<?php echo $image['url'] ?>" alt="">
                                         </div>
-                                        <p class="datepost"><?php echo get_the_date('Y年m月d日'); ?></p>
-                                        <h3><?php echo get_the_title($publish->ID); ?></h3>
+                                        <p class="datepost"><?php echo $date; ?></p>
+                                        <h3><?php echo $title; ?></h3>
                                     </a>
                                 </li>
                     <?php endforeach; ?>

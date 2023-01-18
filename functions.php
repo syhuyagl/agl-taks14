@@ -44,13 +44,38 @@ if (!function_exists('task14_footermenu')) {
     }
 }
 
+
+
+if (!function_exists('mytheme_scripts')) {
+    function mytheme_scripts()
+    {
+        wp_deregister_script('jquery'); // deregisters the default WordPress jQuery  
+        wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"), false);
+        wp_enqueue_script('jquery');
+        wp_enqueue_script('themes', get_template_directory_uri() . '/js/themes.js', array('jquery'));
+        wp_localize_script(
+            'themes',
+            'ajax_object',
+            array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
+            )
+        );
+    }
+}
+
+if (!function_exists('mytheme_theme_setup')) {
+    function mytheme_theme_setup()
+    {
+        add_action('wp_enqueue_scripts', 'mytheme_scripts');
+    }
+}
+add_action('after_setup_theme', 'mytheme_theme_setup');
 function add_css()
 {
     wp_register_style('style', get_template_directory_uri() . '/style.css', false, '1.1', 'all');
     wp_enqueue_style('style');
 }
 add_action('wp_enqueue_scripts', 'add_css');
-
 function publish_post_type()
 {
 
@@ -188,6 +213,10 @@ function get_category_color($category)
     }
 }
 
+
+
+
+
 function pagination($custom_query = null)
 {
     global $wp_query;
@@ -282,4 +311,44 @@ function x_filter_by_category($query)
     }
 }
 add_action('pre_get_posts', 'x_filter_by_category');
+
+add_action('wp_ajax_call_post', 'call_post');
+add_action('wp_ajax_nopriv_call_post', 'call_post');
+function call_post()
+{
+    // Getting the ajax data:
+    // An array of keys("name")/values of each "checked" checkbox
+    $choices = $_POST['choices'];
+    $meta_query = array('relation' => 'OR');
+    var_dump($choices);
+    foreach ($choices as $Key => $Value) {
+        if (count($Value)) {
+            foreach ($Value as $Inkey => $Invalue) {
+                $meta_query[] = array('key' => $Key, 'value' => $Invalue, 'compare' => '=');
+            }
+        }
+    }
+    $args = array(
+        'post_type' => 'post',
+        'meta_query' => $meta_query
+    );
+
+    $query = new WP_Query($args);
+    //if( ! empty ($params['template'])) {
+    ////$template = $params['template'];
+    if ($query->have_posts()):
+        while ($query->have_posts()):
+            $query->the_post();
+        endwhile;
+        wp_reset_query();
+    else:
+        wp_send_json($query->posts);
+    endif;
+    //}
+
+    die();
+}
+
+
+
 ?>

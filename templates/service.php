@@ -17,14 +17,14 @@
     </div>
 
     <div class="feature_img">
-        <img src="assets/img/img_services01.png" alt="">
+        <img src="<?php echo get_template_directory_uri(); ?>/img/img_services01.png" alt="">
     </div>
     <div class="p-service__content">
         <div class="l-container">
             <p class="notice">ひかり税理士法人がご提供するすべてのサービスを目的別に検索していただけます</p>
             <!-- =======checkArea====== -->
             <div class=" p-service__checkArea">
-                <form id="serviceSearch" method="get" action="#">
+                <form id="serviceSearch" method="POST" action="<?php echo site_url() ?>/wp-admin/admin-ajax.php">
 
                     <div class="checkArea__form">
                         <legend class="servicesList-heading">サービスの対象で選ぶ</legend>
@@ -34,19 +34,19 @@
                             echo $taxonomy->name; ?>
                             <div class="c-w240">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="2" checked="">事業者の方</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox" value="事業者の方">事業者の方</label>
                             </div>
                             <div class="c-w240">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="3" checked="">社会福祉法人</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox" value="社会福祉法人">社会福祉法人</label>
                             </div>
                             <div class="c-w240">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="4">個人の方</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox" value="個人の方">個人の方</label>
                             </div>
                             <div class="c-w240">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="" value="5">医療従事者の方</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox" value="医療従事者の方">医療従事者の方</label>
                             </div>
                         </div>
                     </div>
@@ -56,23 +56,23 @@
                         <div class="checkArea__inner">
                             <div class="c-w156">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox[]" value="6">税務</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox" value="税務">税務</label>
                             </div>
                             <div class="c-w156">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox[]" value="7">財務</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox" value="財務">財務</label>
                             </div>
                             <div class="c-w156">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox[]" value="8">相続</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox" value="相続">相続</label>
                             </div>
                             <div class="c-w240">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox[]" value="9">事業承継</label>
+                                    <input class="chkbutton" type="checkbox" name="checkbox" value="事業承継">事業承継</label>
                             </div>
                             <div class="c-w240">
                                 <label>
-                                    <input class="chkbutton" type="checkbox" name="checkbox[]"
+                                    <input class="chkbutton" type="checkbox" name="checkbox"
                                         value="10">ビジネスサポート</label>
                             </div>
                         </div>
@@ -100,8 +100,8 @@
                 <?php endforeach; ?>
             </ul>
             <div class="endcontent">
-                <img src="assets/img/img_more05.png" alt="">
-                <img src="assets/img/img_more06.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/img_more05.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/img/img_more06.png" alt="">
             </div>
         </div>
     </div>
