@@ -1,7 +1,7 @@
 <footer class="c-footer">
         <div class="c-footer__logo">
             <div class="l-container">
-                <a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" alt=""></a>
+                <a href="<?php echo get_site_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/img/logo.png" alt="task14"></a>
             </div>
         </div>
         <div class="c-footer__main">
@@ -38,6 +38,7 @@
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-</body>
+<?php wp_footer(); ?>
 
+</body>
 </html>

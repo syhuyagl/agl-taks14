@@ -379,17 +379,23 @@ Component
   position: relative;
 }
 
-.c-btn a:after {
+.c-btn button:after {
   content: "\f105";
   font-family: "fontAwesome";
   font-size: 2rem;
   position: absolute;
   right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .c-btn a:hover {
   background-color: #fff;
   color: #0078d2;
+}
+
+.c-btn--clear input {
+  cursor: pointer;
 }
 
 .c-btn input[type=reset],
@@ -635,9 +641,11 @@ Component
   content: "\f104";
   font-family: "fontAwesome";
 }
-.c-w156:nth-last-child(-n+2){
+
+.c-w156:nth-last-child(-n+2) {
   width: 240px;
 }
+
 .c-pagination a.next:before {
   content: "\f105";
   font-family: "fontAwesome";
@@ -1432,6 +1440,21 @@ Project
 --------------------------------------------------------------*/
 .p-contact__content {
   padding: 100px 0;
+}
+
+.c-btn__submit {
+  width: 100%;
+  height: 56px;
+  text-align: center;
+  color: #fff;
+  background-color: #0078d2;
+  border: 2px solid #0078d2;
+  position: relative;
+}
+
+.c-btn__submit:hover {
+  background-color: #fff;
+  color: #0078d2;
 }
 
 .p-contact h3 {

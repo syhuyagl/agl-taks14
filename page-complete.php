@@ -1,7 +1,3 @@
-<?php
-/* Template Name: Complete
- */
-?>
 <?php get_header(); ?>
 <main class="p-contact">
     <div class="c-breadcrumb">
@@ -25,7 +21,7 @@
 
         </div>
         <div class="c-btn c-btn--small">
-            <a href="news.html">TOPに戻る</a>
+            <a href="<?php echo get_site_url(); ?>">TOPに戻る</a>
         </div>
     </div>
 </main>

@@ -7,7 +7,7 @@
             <?php foreach ($images as $image): ?>
                 <div>
                     <img src="<?php echo esc_url($image['img']['url']); ?>"
-                        alt="<?php echo esc_attr($image['img']['alt']); ?>" />
+                        alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます" />
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
@@ -19,16 +19,16 @@
             <h2 class="c-title"><span>幅広い案件に対応できるひかりのワンストップサービス</span>目的に応じて、最適な方法をご提案できます</h2>
             <div class="service__inner">
                 <div class="service__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service01.png" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service01.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
                 </div>
                 <div class="service__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service02.png" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service02.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
                 </div>
                 <div class="service__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service03.png" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service03.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
                 </div>
                 <div class="service__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service04.png" alt="">
+                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service04.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
                 </div>
             </div>
             <div class="l-btn l-btn--2btn">
@@ -245,7 +245,7 @@
                                 <li class="c-gridpost__item">
                                     <a href="<?php echo get_permalink($publish->ID); ?>">
                                         <div class="c-gridpost__thumb">
-                                            <img src="<?php echo $image['url'] ?>" alt="">
+                                            <img src="<?php echo $image['url'] ?>" alt="<?php echo $title; ?>">
                                         </div>
                                         <p class="datepost"><?php echo $date; ?></p>
                                         <h3><?php echo $title; ?></h3>

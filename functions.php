@@ -32,6 +32,12 @@ if (!function_exists('task14_menu')) {
         wp_nav_menu($menu);
     }
 }
+function admin_bar()
+{
+
+    add_filter('show_admin_bar', '__return_true', 1000);
+}
+add_action('init', 'admin_bar');
 if (!function_exists('task14_footermenu')) {
     function task14_footermenu($slug)
     {
