@@ -398,6 +398,15 @@ Component
   cursor: pointer;
 }
 
+.mw_wp_form .error {
+  font-size: 93%;
+  color: #f00;
+  position: absolute;
+  display: block;
+  margin-left: 5px;
+  margin-top: 8px;
+}
+
 .c-btn input[type=reset],
 .c-btn input[type=submit] {
   width: 100%;
