@@ -36,7 +36,7 @@
                              ?>
                         <li class="c-gridpost__item">
                             <div class="c-gridpost__thumb">
-                                <img src="<?php echo $image['url'] ?>" alt="">
+                                <img src="<?php echo $image['url'] ?>" alt="<?php echo $title ?>">
                             </div>
                             <div class="c-gridpost__info">
                                 <p class="datepost"><?php echo $date ?></p>

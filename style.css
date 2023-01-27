@@ -379,6 +379,10 @@ Component
   position: relative;
 }
 
+.c-contact__textarea {
+  resize: none;
+}
+
 .c-btn button:after {
   content: "\f105";
   font-family: "fontAwesome";
@@ -398,10 +402,9 @@ Component
   cursor: pointer;
 }
 
-.mw_wp_form .error {
+.c-contact__fullname .mw_wp_form .error {
   font-size: 93%;
   color: #f00;
-  position: absolute;
   display: block;
   margin-left: 5px;
   margin-top: 8px;
@@ -1497,7 +1500,7 @@ Project
   width: 32%;
 }
 
-.p-contact tr:first-child input:last-child {
+.c-contact__name {
   margin-left: 2.5%;
 }
 

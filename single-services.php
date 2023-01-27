@@ -31,7 +31,7 @@ $relatedServices = get_field('related_services', $post->ID)
     </div>
 
     <div class="feature_img">
-        <img src="<?php echo esc_url($feature_image['url']) ?>" alt="">
+        <img src="<?php echo esc_url($feature_image['url']) ?>" alt="<?php echo $title ?>">
     </div>
 
     <div class="p-service__consultation">
@@ -115,7 +115,7 @@ $relatedServices = get_field('related_services', $post->ID)
                             <?php $related_icon = get_field('icon',$relatedService['related_service']->ID  ) ?>
                         <li class="small-12 medium-4">
                             <a href="<?php echo get_permalink($relatedService['related_service']->ID); ?>">
-                                <p class="img"><img src="<?php echo esc_url( $related_icon['url']) ?>" alt="1.jpg"></p>
+                                <p class="img"><img src="<?php echo esc_url( $related_icon['url']) ?>" alt="<?php echo $relatedService['related_service'] -> title ?>"></p>
                                 <p class="text"><span class="arrow"><?php echo $relatedService['related_service'] -> title ?></span></p>
                             </a>
                         </li>
