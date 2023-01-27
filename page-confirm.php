@@ -1,7 +1,3 @@
-<?php
-/* Template Name: Confirm
- */
-?>
 <?php get_header(); ?>
 <main class="p-contact">
 	<div class="c-breadcrumb">
