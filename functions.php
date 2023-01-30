@@ -58,7 +58,7 @@ if (!function_exists('mytheme_scripts')) {
         wp_deregister_script('jquery'); // deregisters the default WordPress jQuery  
         wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"), false);
         wp_enqueue_script('jquery');
-        wp_enqueue_script('themes', get_template_directory_uri() . '/js/themes.js', array('jquery'));
+        wp_enqueue_script('themes', get_template_directory_uri() . '/assets/js/themes.js', array('jquery'));
         wp_localize_script(
             'themes',
             'ajax_object',
@@ -78,7 +78,7 @@ if (!function_exists('mytheme_theme_setup')) {
 add_action('after_setup_theme', 'mytheme_theme_setup');
 function add_css()
 {
-    wp_register_style('style', get_template_directory_uri() . '/style.css', false, '1.1', 'all');
+    wp_register_style('style', get_template_directory_uri() . '/assets/style.css', false, '1.1', 'all');
     wp_enqueue_style('style');
 }
 add_action('wp_enqueue_scripts', 'add_css');
@@ -323,28 +323,18 @@ function call_post_init()
     endif;
     die();
 }
-/**
- * Have WordPress match postname to any of our public post types (post, page, race).
- * All of our public post types can have /post-name/ as the slug, so they need to be unique across all posts.
- * By default, WordPress only accounts for posts and pages where the slug is /post-name/.
- *
- * @param $query The current query.
- */
+
 function vinasupport_add_post_names_to_main_query($query)
 {
-    // Bail if this is not the main query.
     if (!$query->is_main_query()) {
         return;
     }
-    // Bail if this query doesn't match our very specific rewrite rule.
     if (!isset($query->query['page']) || 2 !== count($query->query)) {
         return;
     }
-    // Bail if we're not querying based on the post name.
     if (empty($query->query['name'])) {
         return;
     }
-    // Add CPT to the list of post types WP will include when it queries based on the post name.
     $query->set('post_type', array('post', 'publishs', 'services'));
 }
 add_action('pre_get_posts', 'vinasupport_add_post_names_to_main_query');

@@ -14,8 +14,8 @@ $relatedServices = get_field('related_services', $post->ID)
 <main class="p-service">
     <div class="c-breadcrumb">
         <div class="l-container">
-            <a href="index.html">Home</a>
-            <a href="publish.html">ご提供サービス</a>
+            <a href="<?php echo get_site_url(); ?>">Home</a>
+            <a href="<?php echo get_site_url(); ?>/publish">ご提供サービス</a>
             <span>法人税務顧問</span>
         </div>
     </div>

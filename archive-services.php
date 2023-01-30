@@ -7,7 +7,7 @@ $termsContent = get_term_children(24, $taxonomy_name);
 <main class="p-service">
     <div class="c-breadcrumb">
         <div class="l-container">
-            <a href="index.html">Home</a>
+            <a href="<?php echo get_site_url(); ?>">Home</a>
             <span>ご提供サービス</span>
         </div>
     </div>
@@ -18,7 +18,7 @@ $termsContent = get_term_children(24, $taxonomy_name);
     </div>
 
     <div class="feature_img">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/img_services01.png" alt="">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/img/img_services01.png" alt="">
     </div>
     <div class="p-service__content">
         <div class="l-container">
@@ -86,8 +86,8 @@ $termsContent = get_term_children(24, $taxonomy_name);
                 endforeach; ?>
             </ul>
             <div class="endcontent">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/img_more05.png" alt="">
-                <img src="<?php echo get_template_directory_uri(); ?>/img/img_more06.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/img_more05.png" alt="">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/img_more06.png" alt="">
             </div>
         </div>
     </div>

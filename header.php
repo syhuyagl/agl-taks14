@@ -21,7 +21,7 @@
     <header class="c-header">
         <div class="l-container">
             <h1 class="c-logo"><a href="<?php echo get_site_url(); ?>"><img
-                        src="<?php echo get_template_directory_uri(); ?>/img/logo.png" alt="task14"></a></h1>
+                        src="<?php echo get_template_directory_uri(); ?>/assets/img/logo.png" alt="task14"></a></h1>
             <?php task14_menu('primary'); ?>
         </div>
     </header><!-- /header -->

@@ -2,7 +2,7 @@
 <main class="p-contact">
 	<div class="c-breadcrumb">
 		<div class="l-container">
-			<a href="index.html">Home</a>
+			<a href="<?php echo get_site_url(); ?>">Home</a>
 			<span>お問い合わせ</span>
 		</div>
 	</div>

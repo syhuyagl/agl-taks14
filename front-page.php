@@ -18,16 +18,16 @@
             <h2 class="c-title"><span>幅広い案件に対応できるひかりのワンストップサービス</span>目的に応じて、最適な方法をご提案できます</h2>
             <div class="service__inner">
                 <div class="service__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service01.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/img_service01.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
                 </div>
                 <div class="service__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service02.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/img_service02.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
                 </div>
                 <div class="service__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service03.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/img_service03.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
                 </div>
                 <div class="service__item">
-                    <img src="<?php echo get_template_directory_uri(); ?>/img/img_service04.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/img/img_service04.png" alt="幅広い案件に対応できるひかりのワンストップサービス目的に応じて、最適な方法をご提案できます">
                 </div>
             </div>
             <div class="l-btn l-btn--2btn">
