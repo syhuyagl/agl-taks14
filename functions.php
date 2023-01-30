@@ -78,7 +78,7 @@ if (!function_exists('mytheme_theme_setup')) {
 add_action('after_setup_theme', 'mytheme_theme_setup');
 function add_css()
 {
-    wp_register_style('style', get_template_directory_uri() . '/assets/style.css', false, '1.1', 'all');
+    wp_register_style('style', get_template_directory_uri() . '/style.css', false, '1.1', 'all');
     wp_enqueue_style('style');
 }
 add_action('wp_enqueue_scripts', 'add_css');
