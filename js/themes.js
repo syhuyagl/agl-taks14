@@ -63,30 +63,28 @@ $(document).ready(function () {
       },
     });
   });
-  function cvf_load_all_posts(page) {
-    var form = $("#serviceSearch");
-    $(".c-listpost__item").remove();
+  $("body").on("click", ".c-pagination a", function (e) {
+    var paged = $(this).html();
+    var url = $("#serviceSearch");
+    var listPost = $(".c-listpost");
+    var cate = $(".c-listpost").data("cate");
     $.ajax({
-      url: form.data("url"),
-      type: "POST",
+      type: "GET",
+      url: url.data("url"),
       data: {
-        action: "demo-pagination-load-posts",
-        page: page,
+        action: "load_data",
+        paged: paged,
+        cate: cate,
       },
-      success: function (result) {
-        $(".c-listpost").append(result);
-        // console.log(result);
+      beforeSend: function () {
+        listPost.empty();
+      },
+      success: function (response) {
+        console.log(response);
       },
       error: function (err) {
         console.log(err);
       },
     });
-  }
-  // cvf_load_all_posts(1);
-  $(".c-pagination a").click(function () {
-    var page = $(this).text();
-    console.log(page);
-    cvf_load_all_posts(page);
   });
 });
-$(document.body).trigger("call_post");

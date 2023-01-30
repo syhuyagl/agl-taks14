@@ -32,7 +32,7 @@ $termsContent = get_terms([
                 <form id="serviceSearch" method="POST" action="#" data-url="<?php echo admin_url('admin-ajax.php') ?>">
 
                     <div class="checkArea__form">
-                        <legend class="servicesList-heading">サービスの対象で選ぶ</legend>
+                        <div class="servicesList-heading">サービスの対象で選ぶ</div>
                         <div class="checkArea__inner">
                             <?php
                             if ($terms): ?>
@@ -50,7 +50,7 @@ $termsContent = get_terms([
                     </div>
 
                     <div class="checkArea__form form2">
-                        <legend class="servicesList-heading">サービスの内容で選ぶ</legend>
+                        <div class="servicesList-heading">サービスの内容で選ぶ</div>
                         <div class="checkArea__inner">
                             <?php
                             if ($termsContent): ?>

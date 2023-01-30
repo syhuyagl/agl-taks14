@@ -24,7 +24,7 @@
                                     <?php echo get_the_date('Y年m月d日'); ?>
                                 </span>
                     <?php
-                    $cats = get_the_category($news);
+                    $cats = get_the_category($post);
                     foreach ($cats as $cat) {
                         if ($cat->cat_name) {
                             ?>

@@ -402,12 +402,24 @@ Component
   cursor: pointer;
 }
 
-.c-contact__fullname .mw_wp_form .error {
+.mw_wp_form .error {
   font-size: 93%;
   color: #f00;
   display: block;
   margin-left: 5px;
   margin-top: 8px;
+}
+
+.c-contact__fullname .error {
+  font-size: 93%;
+  color: #f00;
+  position: absolute !important;
+  margin-left: 5px;
+  margin-top: 8px;
+}
+
+.c-contact__fullname .error:last-child {
+  display: none;
 }
 
 .c-btn input[type=reset],
