@@ -31,15 +31,17 @@ $relatedServices = get_field('related_services', $post->ID)
     </div>
 
     <div class="feature_img">
-        <img src="<?php echo esc_url($feature_image['url']) ?>" alt="<?php echo $title ?>">
+        <?php if ($feature_image) : ?>
+            <img src="<?php echo esc_url($feature_image['url']) ?>" alt="<?php echo $title ?>">
+        <?php endif; ?>
     </div>
 
     <div class="p-service__consultation">
         <dl class="l-container2">
             <dt>このような方はご相談ください</dt>
             <?php
-            if ($targets): ?>
-                <?php foreach ($targets as $target): ?>
+            if ($targets) : ?>
+                <?php foreach ($targets as $target) : ?>
                     <dd class="c-checkMark">
                         <?php echo $target['target'] ?>
                     </dd>
@@ -53,9 +55,9 @@ $relatedServices = get_field('related_services', $post->ID)
             <h3 class="p-service__title">ひかり税理士法人を選ぶメリット</h3>
             <dl>
                 <?php
-                if ($advantages): ?>
-                    <?php foreach ($advantages as $advantage): ?>
-                        <?php if ($advantage['advantage_title']): ?>
+                if ($advantages) : ?>
+                    <?php foreach ($advantages as $advantage) : ?>
+                        <?php if ($advantage['advantage_title']) : ?>
                             <dt class="c-checkMark">
                                 <?php echo $advantage['advantage_title'] ?>
                             </dt>
@@ -73,8 +75,8 @@ $relatedServices = get_field('related_services', $post->ID)
             <h3 class="p-service__title">サービスの流れ</h3>
             <?php
             $index = 1;
-            if ($steps): ?>
-                <?php foreach ($steps as $step): ?>
+            if ($steps) : ?>
+                <?php foreach ($steps as $step) : ?>
                     <table>
                         <tbody>
                             <tr>
@@ -82,24 +84,25 @@ $relatedServices = get_field('related_services', $post->ID)
                                 <td>
                                     <h4 class="flow-title"><?php echo $step['step_title'] ?></h4>
                                     <?php
-                                    if($step['step_subtitles']): 
+                                    if ($step['step_subtitles']) :
                                     ?>
-                                        <?php foreach ($step['step_subtitles'] as $stepSubtitle): ?>
-                                            <?php if ($stepSubtitle['step_subtitle']): ?>
+                                        <?php foreach ($step['step_subtitles'] as $stepSubtitle) : ?>
+                                            <?php if ($stepSubtitle['step_subtitle']) : ?>
                                                 <h5 class="flow-subtitle"><?php echo $stepSubtitle['step_subtitle'] ?></h5>
                                             <?php endif; ?>
-                                                <?php foreach ($stepSubtitle['step_descriptions'] as $stepDes): ?>
-                                                    <p class="c-checkMark">
-                                                        <?php echo $stepDes['step_description'] ?>
-                                                    </p>
-                                                <?php endforeach; ?>
+                                            <?php foreach ($stepSubtitle['step_descriptions'] as $stepDes) : ?>
+                                                <p class="c-checkMark">
+                                                    <?php echo $stepDes['step_description'] ?>
+                                                </p>
+                                            <?php endforeach; ?>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                <?php $index++; endforeach; ?>
+                <?php $index++;
+                endforeach; ?>
             <?php endif; ?>
         </div>
     </div>
@@ -109,20 +112,20 @@ $relatedServices = get_field('related_services', $post->ID)
             <h3 class="p-service__subtitle">関連サービス</h3>
             <ul class="division-list c-flex">
                 <?php
-                if($relatedServices):
+                if ($relatedServices) :
                 ?>
-                     <?php foreach ($relatedServices as $relatedService): ?>
-                            <?php $related_icon = get_field('icon',$relatedService['related_service']->ID  ) ?>
+                    <?php foreach ($relatedServices as $relatedService) : ?>
+                        <?php $related_icon = get_field('icon', $relatedService['related_service']->ID) ?>
                         <li class="small-12 medium-4">
                             <a href="<?php echo get_permalink($relatedService['related_service']->ID); ?>">
-                                <p class="img"><img src="<?php echo esc_url( $related_icon['url']) ?>" alt="<?php echo $relatedService['related_service'] -> title ?>"></p>
-                                <p class="text"><span class="arrow"><?php echo $relatedService['related_service'] -> title ?></span></p>
+                                <p class="img"><img src="<?php echo esc_url($related_icon['url']) ?>" alt="<?php echo $relatedService['related_service']->title ?>"></p>
+                                <p class="text"><span class="arrow"><?php echo $relatedService['related_service']->title ?></span></p>
                             </a>
                         </li>
-                        <?php endforeach; ?>
+                    <?php endforeach; ?>
                 <?php endif; ?>
-                
-                
+
+
             </ul>
         </div>
 

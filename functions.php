@@ -32,12 +32,6 @@ if (!function_exists('task14_menu')) {
         wp_nav_menu($menu);
     }
 }
-function admin_bar()
-{
-
-    add_filter('show_admin_bar', '__return_true', 1000);
-}
-add_action('init', 'admin_bar');
 if (!function_exists('task14_footermenu')) {
     function task14_footermenu($slug)
     {
@@ -261,9 +255,9 @@ function service_taxonomy()
     /* Biến $label chứa các tham số thiết lập tên hiển thị của Taxonomy
      */
     $labels = array(
-        'name' => 'Service Taxonomy',
-        'singular' => 'Service Taxonomy',
-        'menu_name' => 'Service Taxonomy',
+        'name' => 'Service Category',
+        'singular' => 'Service Category',
+        'menu_name' => 'Service Category',
     );
     /* Biến $args khai báo các tham số trong custom taxonomy cần tạo
      */
@@ -286,37 +280,6 @@ function service_taxonomy()
 }
 // Hook into the 'init' action
 add_action('init', 'service_taxonomy', 0);
-
-function service_content_taxonomy()
-{
-    /* Biến $label chứa các tham số thiết lập tên hiển thị của Taxonomy
-     */
-    $labels = array(
-        'name' => 'Service Content Taxonomy',
-        'singular' => 'Service Content Taxonomy',
-        'menu_name' => 'Service Content Taxonomy',
-    );
-    /* Biến $args khai báo các tham số trong custom taxonomy cần tạo
-     */
-    $args = array(
-        'labels' => $labels,
-        'hierarchical' => true,
-        'public' => true,
-        'show_ui' => true,
-        'show_admin_column' => true,
-        'show_in_nav_menus' => true,
-        'show_tagcloud' => true,
-    );
-
-
-    /* Hàm register_taxonomy để khởi tạo taxonomy
-     */
-    register_taxonomy('service-content-taxonomy', 'services', $args);
-
-
-}
-// Hook into the 'init' action
-add_action('init', 'service_content_taxonomy', 0);
 
 function x_filter_by_category($query)
 {
@@ -356,7 +319,7 @@ function call_post_init()
         endwhile;
         wp_reset_query();
     else:
-        wp_send_json($query->posts);
+        wp_send_json([$query->posts]);
     endif;
     die();
 }
@@ -385,5 +348,4 @@ function vinasupport_add_post_names_to_main_query($query)
     $query->set('post_type', array('post', 'publishs', 'services'));
 }
 add_action('pre_get_posts', 'vinasupport_add_post_names_to_main_query');
-
 ?>

@@ -1,5 +1,4 @@
 <?php
-
 ?>
 <li class="c-column__item"><a href="<?php the_permalink(); ?>">
         <img src="<?php $icon = get_field('icon', $post->ID);

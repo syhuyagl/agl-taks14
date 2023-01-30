@@ -1,13 +1,9 @@
 <?php get_header();
-$terms = get_terms([
-    'taxonomy' => "service-taxonomy",
-    'hide_empty' => false,
-]);
-$termsContent = get_terms([
-    'taxonomy' => "service-content-taxonomy",
-    'hide_empty' => false,
-])
-    ?>
+$term_id = 10;
+$taxonomy_name = 'service-taxonomy';
+$terms = get_term_children($term_id, $taxonomy_name);
+$termsContent = get_term_children(24, $taxonomy_name);
+?>
 <main class="p-service">
     <div class="c-breadcrumb">
         <div class="l-container">
@@ -35,12 +31,13 @@ $termsContent = get_terms([
                         <div class="servicesList-heading">サービスの対象で選ぶ</div>
                         <div class="checkArea__inner">
                             <?php
-                            if ($terms): ?>
-                                <?php foreach ($terms as $term): ?>
+                            if ($terms) : ?>
+                                <?php foreach ($terms as $term) :
+                                    $term = get_term_by('id', $term, $taxonomy_name);
+                                ?>
                                     <div class="c-w240">
                                         <label>
-                                            <input class="chkbutton" type="checkbox" name="service-taxonomy"
-                                                value="<?php echo $term->term_id ?>">
+                                            <input class="chkbutton" type="checkbox" name="service-taxonomy" value="<?php echo $term->term_id ?>">
                                             <?php echo $term->name ?>
                                         </label>
                                     </div>
@@ -53,12 +50,12 @@ $termsContent = get_terms([
                         <div class="servicesList-heading">サービスの内容で選ぶ</div>
                         <div class="checkArea__inner">
                             <?php
-                            if ($termsContent): ?>
-                                <?php foreach (array_reverse($termsContent) as $term): ?>
+                            if ($termsContent) : ?>
+                                <?php foreach ($termsContent as $term) :
+                                     $term = get_term_by('id', $term, $taxonomy_name); ?>
                                     <div class="c-w156">
                                         <label>
-                                            <input class="chkbutton" type="checkbox" name="service-content-taxonomy"
-                                                value="<?php echo $term->term_id ?>">
+                                            <input class="chkbutton" type="checkbox" name="service-content-taxonomy" value="<?php echo $term->term_id ?>">
                                             <?php echo $term->name ?>
                                         </label>
                                     </div>
@@ -72,20 +69,21 @@ $termsContent = get_terms([
             <?php
             $services = get_posts(array('post_type' => 'services', 'orderby' => 'date', 'order' => 'DESC', 'posts_per_page' => 10));
             ?>
-            <p class="p-service__result">23件が該当しました</p>
+            <p class="p-service__result"><?php echo count($services); ?>件が該当しました</p>
             <ul class="c-column">
-                <?php foreach ($services as $service):
+                <?php foreach ($services as $service) :
                     setup_postdata($service);
-                    ?>
+                ?>
                     <li class="c-column__item"><a href="<?php echo get_permalink($service->ID); ?>">
                             <img src="<?php $icon = get_field('icon', $service->ID);
-                            echo esc_url($icon['url']); ?>" alt="<?php echo get_the_title($service->ID); ?>">
+                                        echo esc_url($icon['url']); ?>" alt="<?php echo get_the_title($service->ID); ?>">
                             <p>
                                 <?php echo get_the_title($service->ID); ?>
                             </p>
                         </a>
                     </li>
-                <?php endforeach; ?>
+                <?php
+                endforeach; ?>
             </ul>
             <div class="endcontent">
                 <img src="<?php echo get_template_directory_uri(); ?>/img/img_more05.png" alt="">

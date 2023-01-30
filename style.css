@@ -8,8 +8,14 @@
 /*
 Theme Name: task14
 Version: 1.0.0
+Theme URI: http://aglstaff.allgrow-labo.jp/hosyhuy/task14
 Author: syhuyagl
 Textdomain: task14
+Description: task 14 by syhuyagl
+Tags: tasks
+Requires at least: 5.0
+Tested up to: 5.4
+Requires PHP: 7.0
 */
 html,
 body,
@@ -524,6 +530,12 @@ Component
 
 .c-listpost__info {
   width: 30%;
+  display: flex;
+}
+
+.c-cats {
+  display: flex;
+  flex-direction: column;
 }
 
 .c-listpost .titlepost {
@@ -1568,4 +1580,20 @@ Utity
 
 .u-bborder {
   border-bottom: 1px solid #ccc;
+}
+
+.c-404__404 {
+  font-size: 6.6rem;
+  color: #0078D2;
+  line-height: 3;
+}
+
+.c-404 {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.c-404__des {
+  color: #0078D2;
+  font-size: 2rem;
 }

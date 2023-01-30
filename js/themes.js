@@ -42,7 +42,7 @@ $(document).ready(function () {
     var form = $("#serviceSearch");
     $(".c-column__item").remove();
     $(".c-column").empty();
-
+    $(".p-service__result").empty();
     $("input[type=checkbox]:checked").each(function () {
       if (!choices.hasOwnProperty(this.name)) choices[this.name] = [this.value];
       else choices[this.name].push(this.value);
@@ -56,31 +56,8 @@ $(document).ready(function () {
       },
       success: function (result) {
         $(".c-column").append(result);
+        $(".p-service__result").append($(".c-column__item").length,['件が該当しました']);
         // console.log(result);
-      },
-      error: function (err) {
-        console.log(err);
-      },
-    });
-  });
-  $("body").on("click", ".c-pagination a", function (e) {
-    var paged = $(this).html();
-    var url = $("#serviceSearch");
-    var listPost = $(".c-listpost");
-    var cate = $(".c-listpost").data("cate");
-    $.ajax({
-      type: "GET",
-      url: url.data("url"),
-      data: {
-        action: "load_data",
-        paged: paged,
-        cate: cate,
-      },
-      beforeSend: function () {
-        listPost.empty();
-      },
-      success: function (response) {
-        console.log(response);
       },
       error: function (err) {
         console.log(err);
