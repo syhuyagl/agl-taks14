@@ -65,7 +65,7 @@
                         <?php endwhile; ?>
                     <?php endif; ?>
                     <div class="c-pagination">
-                        <?php echo pagination_tdc($newss1, $paged, null, 'news') ?>
+                        <?php echo pagination_tdc($newss1, 1, null, 'news') ?>
                     </div>
                 </ul>
                 <ul class="c-listpost" id="cat_1" data-cat="3">
@@ -106,7 +106,7 @@
                         <?php endwhile; ?>
                     <?php endif; ?>
                     <div class="c-pagination">
-                        <?php echo pagination_tdc($newss, $paged, null, 'news') ?>
+                        <?php echo pagination_tdc($newss, 1, null, 'news') ?>
                     </div>
                 </ul>
                 <ul class="c-listpost" id="cat_2" data-cat="4">
@@ -147,7 +147,7 @@
                         <?php endwhile; ?>
                     <?php endif; ?>
                     <div class="c-pagination">
-                        <?php echo pagination_tdc($newss, $paged, null, 'news') ?>
+                        <?php echo pagination_tdc($newss, 1, null, 'news') ?>
                     </div>
                 </ul>
                 <ul class="c-listpost" id="cat_3" data-cat="5">
@@ -188,7 +188,7 @@
                         <?php endwhile; ?>
                     <?php endif; ?>
                     <div class="c-pagination">
-                        <?php echo pagination_tdc($newss, $paged, null, 'news') ?>
+                        <?php echo pagination_tdc($newss, 1, null, 'news') ?>
                     </div>
                 </ul>
                 <ul class="c-listpost" id="cat_4" data-cat="6">
@@ -227,7 +227,7 @@
                         <?php endwhile; ?>
                     <?php endif; ?>
                     <div class="c-pagination">
-                        <?php echo pagination_tdc($newss, $paged, null, 'news') ?>
+                        <?php echo pagination_tdc($newss, 1, null, 'news') ?>
                     </div>
                 </ul>
                 <ul class="c-listpost" id="cat_5">
@@ -266,7 +266,7 @@
                         <?php endwhile; ?>
                     <?php endif; ?>
                     <div class="c-pagination">
-                        <?php echo pagination_tdc($newss, $paged, null, 'news') ?>
+                        <?php echo pagination_tdc($newss, 1, null, 'news') ?>
                     </div>
                 </ul>
             </div>
