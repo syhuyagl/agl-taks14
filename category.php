@@ -30,7 +30,7 @@
                             ?>
                                         <span class="cat">
                                             <i class="c-dotcat"
-                                                style="background-color: <?php get_category_color($cat->cat_name); ?>"></i>
+                                                style="background-color: <?php echo get_category_color($cat->cat_name); ?>"></i>
                                             <a href="<?php echo get_category_link($cat->term_id); ?>">
                                                 <?php echo $cat->cat_name; ?>
                                             </a>

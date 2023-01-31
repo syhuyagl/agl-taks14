@@ -23,9 +23,9 @@ $(document).ready(function () {
     $(".c-tabs li").not(item).removeClass("active");
     $(".c-tabs li").not(item).css("background-color", "");
 
-    $("#" + showContent).fadeIn();
+    $("#" + showContent).fadeIn().addClass('active');
     $(".c-listpost")
-      .not("#" + showContent)
+      .not("#" + showContent).removeClass("active")
       .hide();
   });
   var pathname = window.location.pathname;
@@ -56,8 +56,39 @@ $(document).ready(function () {
       },
       success: function (result) {
         $(".c-column").append(result);
-        $(".p-service__result").append($(".c-column__item").length,['件が該当しました']);
+        $(".p-service__result").append($(".c-column__item").length, [
+          "件が該当しました",
+        ]);
         // console.log(result);
+      },
+      error: function (err) {
+        console.log(err);
+      },
+    });
+  });
+  $("body").on("click", ".pagination li a", function (e) {
+    e.preventDefault();
+    var paged = $(this).html();
+    var url = $(".c-tabs__content").data("url");
+    var listPost = $(".c-listpost.active");
+    var cate = listPost.data("cat");
+    var loading = '<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {
+        action: "load_data",
+        paged: paged,
+        cate: cate
+      },
+      beforeSend: function () {
+        listPost.empty();
+        listPost.append(loading);
+      },
+      success: function (response) {
+        listPost.empty();
+        listPost.append(response.data.html);
+        listPost.append(response.data.paged);
       },
       error: function (err) {
         console.log(err);

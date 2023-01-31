@@ -16,7 +16,6 @@
             )
         );
         register_nav_menu('primary-menu', __('Primary Menu', 'task14'));
-
     }
     add_action('init', 'task14_theme_setup');
 }
@@ -138,7 +137,6 @@ function publish_post_type()
 
     // Registering your Custom Post Type
     register_post_type('publishs', $args);
-
 }
 
 add_action('init', 'publish_post_type', 0);
@@ -198,26 +196,25 @@ function service_post_type()
 
     // Registering your Custom Post Type
     register_post_type('services', $args);
-
 }
 
 add_action('init', 'service_post_type', 0);
 function get_category_color($category)
 {
     if ($category == "お知らせ") {
-        echo "#1bb7c5";
+        return "#1bb7c5";
     }
     if ($category == "税の最新情報") {
-        echo "#d6772a";
+        return "#d6772a";
     }
     if ($category == "税制改正") {
-        echo "#c4a021";
+        return "#c4a021";
     }
     if ($category == "掲載情報") {
-        echo "#416ad3";
+        return "#416ad3";
     }
     if ($category == "バックナンバー") {
-        echo "#ccc";
+        return "#ccc";
     }
 }
 
@@ -275,8 +272,6 @@ function service_taxonomy()
     /* Hàm register_taxonomy để khởi tạo taxonomy
      */
     register_taxonomy('service-taxonomy', 'services', $args);
-
-
 }
 // Hook into the 'init' action
 add_action('init', 'service_taxonomy', 0);
@@ -302,7 +297,6 @@ function call_post_init()
             foreach ($Value as $Inkey => $Invalue) {
                 $meta_query[] = array('taxonomy' => $Key, 'field' => 'term_id', 'terms' => (int) $Invalue, 'include_children' => true);
             }
-
         }
     }
 
@@ -312,13 +306,13 @@ function call_post_init()
     );
 
     $query = new WP_Query($args);
-    if ($query->have_posts()):
-        while ($query->have_posts()):
+    if ($query->have_posts()) :
+        while ($query->have_posts()) :
             $query->the_post();
             get_template_part('template-parts/content', 'filter', $args);
         endwhile;
         wp_reset_query();
-    else:
+    else :
         wp_send_json([$query->posts]);
     endif;
     die();
@@ -338,4 +332,105 @@ function vinasupport_add_post_names_to_main_query($query)
     $query->set('post_type', array('post', 'publishs', 'services'));
 }
 add_action('pre_get_posts', 'vinasupport_add_post_names_to_main_query');
-?>
+add_action('wp_ajax_load_data', 'load_data_init');
+add_action('wp_ajax_nopriv_load_data', 'load_data_init');
+function load_data_init()
+{
+    $paged = $_POST['paged'];
+    $cate = $_POST['cate'];
+    $args = array(
+        'post_type' => 'post',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'paged' => $paged,
+        'posts_per_page' => 5, 'cat' => $cate,
+    );
+    $posts = '';
+    $query = new WP_Query($args);
+    if ($query->have_posts()) :
+        while ($query->have_posts()) :
+            $query->the_post();
+            $cates = get_the_category();
+            $posts .= '<li class="c-listpost__item">
+                        <div class="c-listpost__info">
+                            <span class="datepost">' . get_the_date('Y年m月d日') . '</span>';
+            $posts .=          '<div class="c-cats">';
+            foreach ($cates as $cat) {
+                if ($cat->name) {
+                    $posts .= '<span class="cat">
+                    <i class="c-dotcat" style="background-color:' . get_category_color($cat->name) . '"></i>
+                    <a href="#">' . $cat->name . '</a>
+                </span>';
+                }
+            }
+            $posts .=  '</div>
+                        </div> ';
+            $posts .= '<h3 class="titlepost"><a href="' . get_the_permalink() . '">' . get_the_title() . '</a>
+            </h3></li>';
+        endwhile;
+        wp_reset_query();
+    else :
+        wp_send_json([$query->posts]);
+    endif;
+    $pagin = pagination_tdc($query, $paged, null, 'news');
+    wp_send_json_success(['html' => $posts, 'paged' => $pagin]);
+    die();
+}
+
+function pagination_tdc($wp_query, $paged, $cat = null, $type)
+{
+    if ($wp_query->max_num_pages <= 1)
+        return;
+    $paged = $paged;
+    $max = intval($wp_query->max_num_pages);
+
+    if ($paged >= 1)
+        $links[] = $paged;
+    if ($paged >= 3) {
+        $links[] = $paged - 1;
+        $links[] = $paged - 2;
+    }
+
+    if (($paged + 2) <= $max) {
+        $links[] = $paged + 2;
+        $links[] = $paged + 1;
+    }
+    $html = '';
+    $html .= '<ul class="pagination" data-cat="' . $cat . '">' . "\n";
+
+
+    if (!in_array(1, $links)) {
+        $class = 1 == $paged ? ' class="active"' : '';
+        if (!$class) {
+            $html .= '<li><a rel="nofollow" class="page larger" href="' . build_url($cat, 1, $type) . '" >1</a></li>';
+        } else {
+            $html .= '<li ' . $class . '>1</li>';
+        }
+        if (!in_array(2, $links))
+            $html .= '<li>…</li>';
+    }
+
+    sort($links);
+    foreach ((array) $links as $link) {
+        $class = $paged == $link ? ' class="active"' : '';
+        if (!$class) {
+            $html .= '<li><a rel="nofollow" class="page larger" href="' . build_url($cat, $link, $type) . '">' . $link . '</a></li>' . "\n";
+        } else {
+            $html .= '<li ' . $class . '>' . $link . '</li>';
+        }
+    }
+
+    if (!in_array($max, $links)) {
+        if (!in_array($max - 1, $links)) $html .= '<li class="dots">…</li>' . "\n";
+        $class = $paged == $max ? ' class="active"' : '';
+        $html .= '<li ' . $class . '><a rel="nofollow" class="page larger" href="' . build_url($cat, $max, $type) . '">' . $max . '</a></li>';
+    }
+    $html .= '</ul>' . "\n";
+    return $html;
+}
+
+function build_url($cat, $paged, $type)
+{
+    $url = home_url("/$type/page/" . $paged);
+    return $url;
+}

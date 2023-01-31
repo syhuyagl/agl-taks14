@@ -76,7 +76,7 @@
                                     ?>
                                             <div class="c-cats">
                                                 <span class="cat">
-                                                    <i class="c-dotcat" style="background-color: <?php get_category_color($cat->cat_name); ?>"></i>
+                                                    <i class="c-dotcat" style="background-color: <?php echo get_category_color($cat->cat_name); ?>"></i>
                                                     <a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo $cat->cat_name; ?></a>
                                                 </span>
                                             </div>
@@ -104,10 +104,12 @@
                                     foreach ($cats as $cat) {
                                         if ($cat->cat_name) {
                                     ?>
+                                    <div class="c-cats">
                                             <span class="cat">
                                                 <i class="c-dotcat" style="background-color: #1bb7c5"></i>
                                                 <a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo $cat->cat_name; ?></a>
                                             </span>
+                                    </div>
                                     <?php }
                                     } ?>
 
@@ -132,10 +134,12 @@
                                     foreach ($cats as $cat) {
                                         if ($cat->cat_name) {
                                     ?>
+                                    <div class="c-cats">
                                             <span class="cat">
                                                 <i class="c-dotcat" style="background-color: #d6772a;"></i>
                                                 <a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo $cat->cat_name; ?></a>
                                             </span>
+                                    </div>
                                     <?php }
                                     } ?>
 
@@ -160,10 +164,12 @@
                                     foreach ($cats as $cat) {
                                         if ($cat->cat_name) {
                                     ?>
+                                    <div class="c-cats">
                                             <span class="cat">
                                                 <i class="c-dotcat" style="background-color: #c4a021"></i>
                                                 <a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo $cat->cat_name; ?></a>
                                             </span>
+                                    </div>
                                     <?php }
                                     } ?>
 
@@ -188,10 +194,12 @@
                                     foreach ($cats as $cat) {
                                         if ($cat->cat_name) {
                                     ?>
+                                    <div class="c-cats">
                                             <span class="cat">
                                                 <i class="c-dotcat" style="background-color: #416ad3"></i>
                                                 <a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo $cat->cat_name; ?></a>
                                             </span>
+                                    </div>
                                     <?php }
                                     } ?>
 
@@ -216,10 +224,12 @@
                                     foreach ($cats as $cat) {
                                         if ($cat->cat_name) {
                                     ?>
+                                    <div class="c-cats">
                                             <span class="cat">
                                                 <i class="c-dotcat" style="background-color: #ccc"></i>
                                                 <a href="<?php echo get_category_link($cat->term_id); ?>"><?php echo $cat->cat_name; ?></a>
                                             </span>
+                                    </div>
                                     <?php }
                                     } ?>
 
