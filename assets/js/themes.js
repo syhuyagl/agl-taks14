@@ -23,9 +23,12 @@ $(document).ready(function () {
     $(".c-tabs li").not(item).removeClass("active");
     $(".c-tabs li").not(item).css("background-color", "");
 
-    $("#" + showContent).fadeIn().addClass('active');
+    $("#" + showContent)
+      .fadeIn()
+      .addClass("active");
     $(".c-listpost")
-      .not("#" + showContent).removeClass("active")
+      .not("#" + showContent)
+      .removeClass("active")
       .hide();
   });
   var pathname = window.location.pathname;
@@ -66,20 +69,22 @@ $(document).ready(function () {
       },
     });
   });
+
   $("body").on("click", ".pagination li a", function (e) {
     e.preventDefault();
     var paged = $(this).html();
     var url = $(".c-tabs__content").data("url");
     var listPost = $(".c-listpost.active");
     var cate = listPost.data("cat");
-    var loading = '<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>'
+    var loading =
+      '<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>';
     $.ajax({
       type: "POST",
       url: url,
       data: {
         action: "load_data",
         paged: paged,
-        cate: cate
+        cate: cate,
       },
       beforeSend: function () {
         listPost.empty();
@@ -94,5 +99,41 @@ $(document).ready(function () {
         console.log(err);
       },
     });
+  });
+  function next_prev(prev) {
+    var currentPage = parseInt($(".pagination li.active").html());
+    var url = $(".c-tabs__content").data("url");
+    var listPost = $(".c-listpost.active");
+    var cate = listPost.data("cat");
+    var loading =
+      '<div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>';
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: {
+        action: "load_data",
+        paged: prev ? currentPage - 1 : currentPage + 1,
+        cate: cate,
+      },
+      beforeSend: function () {
+        listPost.empty();
+        console.log(currentPage);
+        listPost.append(loading);
+      },
+      success: function (response) {
+        listPost.empty();
+        listPost.append(response.data.html);
+        listPost.append(response.data.paged);
+      },
+      error: function (err) {
+        console.log(err);
+      },
+    });
+  }
+  $("body").on("click", ".c-btn__prev", function (e) {
+    next_prev(true);
+  });
+  $("body").on("click", ".c-btn__next", function (e) {
+    next_prev(false);
   });
 });

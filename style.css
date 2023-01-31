@@ -682,6 +682,26 @@ Component
   background-color: #f8f8f8;
 }
 
+.pagination span {
+  display: inline-block;
+  width: 45px;
+  line-height: 45px;
+  margin: 0 5px;
+  background-color: #f8f8f8;
+}
+.pagination span:hover {
+  color: #fff;
+  background-color: #0078d2;
+  cursor: pointer;
+}
+.c-btn__prev::before {
+  content: "\f104";
+  font-family: "fontAwesome";
+}
+.c-btn__next::before {
+  content: "\f105";
+  font-family: "fontAwesome";
+}
 .c-pagination span.current {
   color: #fff;
   display: inline-block;

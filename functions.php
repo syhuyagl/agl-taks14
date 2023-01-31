@@ -359,7 +359,7 @@ function load_data_init()
                 if ($cat->name) {
                     $posts .= '<span class="cat">
                     <i class="c-dotcat" style="background-color:' . get_category_color($cat->name) . '"></i>
-                    <a href="'.get_category_link($cat->term_id).'">' . $cat->name . '</a>
+                    <a href="' . get_category_link($cat->term_id) . '">' . $cat->name . '</a>
                 </span>';
                 }
             }
@@ -397,8 +397,9 @@ function pagination_tdc($wp_query, $paged, $cat = null, $type)
     }
     $html = '';
     $html .= '<ul class="pagination" data-cat="' . $cat . '">' . "\n";
-
-
+    if ($paged != 1) {
+        $html .= '<li><span rel="nofollow" class="c-btn__prev"></span></li>';
+    }
     if (!in_array(1, $links)) {
         $class = 1 == $paged ? ' class="active"' : '';
         if (!$class) {
@@ -424,6 +425,9 @@ function pagination_tdc($wp_query, $paged, $cat = null, $type)
         if (!in_array($max - 1, $links)) $html .= '<li class="dots">…</li>' . "\n";
         $class = $paged == $max ? ' class="active"' : '';
         $html .= '<li ' . $class . '><a rel="nofollow" class="page larger" href="' . build_url($cat, $max, $type) . '">' . $max . '</a></li>';
+    }
+    if ($paged < $max) {
+        $html .= '<li><span rel="nofollow" class="c-btn__next"></span></li>';
     }
     $html .= '</ul>' . "\n";
     return $html;
