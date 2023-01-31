@@ -359,7 +359,7 @@ function load_data_init()
                 if ($cat->name) {
                     $posts .= '<span class="cat">
                     <i class="c-dotcat" style="background-color:' . get_category_color($cat->name) . '"></i>
-                    <a href="#">' . $cat->name . '</a>
+                    <a href="'.get_category_link($cat->term_id).'">' . $cat->name . '</a>
                 </span>';
                 }
             }
@@ -407,7 +407,7 @@ function pagination_tdc($wp_query, $paged, $cat = null, $type)
             $html .= '<li ' . $class . '>1</li>';
         }
         if (!in_array(2, $links))
-            $html .= '<li>…</li>';
+            $html .= '<li class="dots">…</li>';
     }
 
     sort($links);
